@@ -1,8 +1,18 @@
 import wollok.game.*
 import pepita.*
+import tanque.*
 
 program game {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+	
+	game.title("Juego Base") 
+	game.cellSize(13)
+	game.width(30)
+	game.height(20)
+	game.boardGround("suelo.png")
+	game.addVisual(tanque)
+	keyboard.up().onPressDo { tanque.move(tanque.position().up(1)) }
+	keyboard.down().onPressDo { tanque.move(tanque.position().down(1)) }
+	keyboard.left().onPressDo { tanque.move(tanque.position().left(1)) }
+	keyboard.right().onPressDo { tanque.move(tanque.position().right(1)) }
 	game.start()
 }

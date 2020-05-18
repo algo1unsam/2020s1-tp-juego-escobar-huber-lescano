@@ -2,13 +2,15 @@ import wollok.game.*
 
 object pepita {
 
-	method position() {
-		return game.center()
-	}
+	var property position = game.center()
+	
 
 	method image() {
-		return "pepita.png"
+		return "jugador.png"
 	}
+	method move(nuevaPosicion) {
+		self.position(nuevaPosicion)
+	}	
 
 }
 
