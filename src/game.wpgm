@@ -10,9 +10,13 @@ program game {
 	game.height(20)
 	game.boardGround("suelo.png")
 	game.addVisual(tanque)
-	keyboard.up().onPressDo { tanque.move(tanque.position().up(1)) }
-	keyboard.down().onPressDo { tanque.move(tanque.position().down(1)) }
-	keyboard.left().onPressDo { tanque.move(tanque.position().left(1)) }
-	keyboard.right().onPressDo { tanque.move(tanque.position().right(1)) }
+	keyboard.up().onPressDo { (if tanque.image() != "tanque.png"){tanque.image("tanque.png")})
+		tanque.move(tanque.position().up(1))}
+	keyboard.down().onPressDo { (if tanque.image() != "tanque-abj.png"){tanque.image("tanque-abj.png")})
+		tanque.move(tanque.position().down(1)) }
+	keyboard.left().onPressDo { (if tanque.image() != "tanque-izq.png"){tanque.image("tanque-izq.png")})
+		tanque.move(tanque.position().left(1)) }
+	keyboard.right().onPressDo { (if tanque.image() != "tanque-der.png"){tanque.image("tanque-der.png")})
+		tanque.move(tanque.position().right(1)) }
 	game.start()
 }
