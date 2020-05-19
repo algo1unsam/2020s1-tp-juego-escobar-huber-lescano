@@ -11,18 +11,41 @@ program game {
 	game.height(20)
 	game.boardGround("suelo.png")
 	game.addVisual(tanque)
+	/* Agregando muros laterales */
 	game.width().times({i => agregadorMuros.agregarMuro(i-1, 0)})
 	game.height().times({i => agregadorMuros.agregarMuro(0, i)})
 	game.width().times({i => agregadorMuros.agregarMuro(i-1, game.height()-1)})
 	game.height().times({i => agregadorMuros.agregarMuro(game.width()-1, i-1)})
-	game.height().times({i => agregadorMuros.agregarMuro(game.width()-2, i-1)})
+	
+	/* Controles del Tanque */
 	keyboard.up().onPressDo { (if tanque.image() != "tanque.png"){tanque.image("tanque.png")})
-		tanque.move(tanque.position().up(1))}
+		tanque.move(tanque.position().up(1))
+		tanque.orientacion(arriba)
+		}
 	keyboard.down().onPressDo { (if tanque.image() != "tanque-abj.png"){tanque.image("tanque-abj.png")})
-		tanque.move(tanque.position().down(1)) }
+		tanque.move(tanque.position().down(1)) 
+		tanque.orientacion(abajo)
+		}
 	keyboard.left().onPressDo { (if tanque.image() != "tanque-izq.png"){tanque.image("tanque-izq.png")})
-		tanque.move(tanque.position().left(1)) }
+		tanque.move(tanque.position().left(1)) 
+		tanque.orientacion(izquierda)
+		}
 	keyboard.right().onPressDo { (if tanque.image() != "tanque-der.png"){tanque.image("tanque-der.png")})
-		tanque.move(tanque.position().right(1)) }
+		tanque.move(tanque.position().right(1)) 
+		tanque.orientacion(derecha)
+		}
+		
+	/* Disparo del tanque */
+	keyboard.a().onPressDo{(tanque.disparar())}
+		
+	/* Tanques enemigos */
+	const tanqueE = new Enemigos()
+	game.addVisual(tanqueE)
+	
+	/* Colisiones */
+	game.whenCollideDo(tanqueE, { elemento => 
+		game.removeVisual(tanqueE)
+			elemento.remover()
+	}) 
 	game.start()
 }
