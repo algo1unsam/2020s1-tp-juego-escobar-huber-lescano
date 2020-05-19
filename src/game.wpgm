@@ -1,6 +1,7 @@
 import wollok.game.*
 import pepita.*
 import tanque.*
+import bloques.*
 
 program game {
 	
@@ -10,6 +11,11 @@ program game {
 	game.height(20)
 	game.boardGround("suelo.png")
 	game.addVisual(tanque)
+	game.width().times({i => agregadorMuros.agregarMuro(i-1, 0)})
+	game.height().times({i => agregadorMuros.agregarMuro(0, i)})
+	game.width().times({i => agregadorMuros.agregarMuro(i-1, game.height()-1)})
+	game.height().times({i => agregadorMuros.agregarMuro(game.width()-1, i-1)})
+	game.height().times({i => agregadorMuros.agregarMuro(game.width()-2, i-1)})
 	keyboard.up().onPressDo { (if tanque.image() != "tanque.png"){tanque.image("tanque.png")})
 		tanque.move(tanque.position().up(1))}
 	keyboard.down().onPressDo { (if tanque.image() != "tanque-abj.png"){tanque.image("tanque-abj.png")})
