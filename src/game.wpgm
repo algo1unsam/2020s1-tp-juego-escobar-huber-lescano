@@ -1,7 +1,7 @@
 import wollok.game.*
-import pepita.*
 import tanque.*
 import bloques.*
+import enemigos.*
 
 program game {
 	
@@ -18,29 +18,28 @@ program game {
 	game.height().times({i => agregadorMuros.agregarMuro(game.width()-1, i-1)})
 	
 	/* Controles del Tanque */
-	keyboard.up().onPressDo { (if tanque.image() != "tanque.png"){tanque.image("tanque.png")})
-		tanque.move(tanque.position().up(1))
-		tanque.orientacion(arriba)
-		}
-	keyboard.down().onPressDo { (if tanque.image() != "tanque-abj.png"){tanque.image("tanque-abj.png")})
-		tanque.move(tanque.position().down(1)) 
-		tanque.orientacion(abajo)
-		}
-	keyboard.left().onPressDo { (if tanque.image() != "tanque-izq.png"){tanque.image("tanque-izq.png")})
-		tanque.move(tanque.position().left(1)) 
-		tanque.orientacion(izquierda)
-		}
-	keyboard.right().onPressDo { (if tanque.image() != "tanque-der.png"){tanque.image("tanque-der.png")})
-		tanque.move(tanque.position().right(1)) 
-		tanque.orientacion(derecha)
-		}
+	keyboard.up().onPressDo {tanque.direccion(arriba)
+		tanque.move()
+	}
+	keyboard.down().onPressDo { tanque.direccion(abajo)
+		tanque.move()
+	}
+	keyboard.left().onPressDo { tanque.direccion(izquierda)
+		tanque.move()
+	}
+	keyboard.right().onPressDo { tanque.direccion(derecha)
+		tanque.move()
+	}
 		
 	/* Disparo del tanque */
 	keyboard.a().onPressDo{(tanque.disparar())}
 		
 	/* Tanques enemigos */
-	const tanqueE = new Enemigos()
+	const tanqueE = new Enemigo()
 	game.addVisual(tanqueE)
+	keyboard.r().onPressDo{ const tanqueE = new Enemigo(position = game.at(1.randomUpTo(29), 1.randomUpTo(19))) 
+		game.addVisual(tanqueE)
+	}
 	
 	/* Colisiones */
 	game.whenCollideDo(tanqueE, { elemento => 

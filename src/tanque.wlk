@@ -1,107 +1,79 @@
 import wollok.game.*
 
-const arriba = 0 
-const derecha = 1
-const abajo = 2
-const izquierda = 3
-
 class Bala{
-	var image = "bala.png"
-	const images = ["bala.png","bala-der.png","bala-abj.png","bala-izq.png"]
-	var property orientacion = 0
+	var property direccion = arriba
+	var property image = direccion.imagenBala()
 	var property position = tanque.position()
 	//var removido = false
 	method position(){
 		return position
 	}
-	method image(orientacion_){
-		image = images.get(orientacion_)
-	}
-	method image() {
-		return image
-	}
+
 	// Se ejecuta cuando el tanque dispara la bala
-	method disparada(orientacion_){
-		self.orientacion(orientacion_)
-		self.image(orientacion_)
+	method disparada(direccion){
+		self.direccion(direccion)
+		self.image(direccion.imagenBala())
 		
 		game.addVisual(self)
 		
 		game.onTick(50, "balaMoviendose"+self.identity().toString(), { => 
-			if(position.x()>1  and position.x() < 28 and position.y() > 1 and position.y() < 18){
-				self.move(orientacion_,position) 
-			}else{
-				
-				self.remover()
-				
-				}
-			})
-		
+			if(position.x()>1  and position.x() < 28 and position.y() > 1 and position.y() < 18){ self.move() }
+			else{ self.remover() }
+		})
 	}
 	method remover(){
 		game.removeTickEvent("balaMoviendose"+self.identity().toString())
 		game.removeVisual(self)
 		
 	}
-	
-
 	// La bala se mueve según la orientación del tanque que la disparó
-	
-	method move(orientacion_,position_) {
-		self.position(if(orientacion_ == arriba){
-				 self.position().up(1)
-			}
-			else if (orientacion_ == derecha){
-				 self.position().right(1)
-			}
-			else if ( orientacion_ == abajo){
-				self.position().down(1)
-			}
-			else{
-				self.position().left(1)
-			})	
-	}
+	method move() { direccion.move(self) }
 }
 object tanque {
 	var property position = game.at(3,3)
-	var image = "tanque.png"
-	var property orientacion = 0 // 0 arriba, 1 derecha , 2 abajo , 3 izquierda ( Igual que las posiciones de images )
-	method image() {
-		return image
-	}
-	method image(nuevaImage){
-		image = nuevaImage
-	}
-	
-	method move(nuevaPosicion) {
-		self.position(nuevaPosicion)
-		//console.println(position)
+	var property direccion = abajo
+	var property image = direccion.imagenTanque()
+
+	method move() {
+		direccion.move(self)
 	}	
 	method disparar(){
 		const bala = new Bala()
-		bala.disparada(orientacion)
+		bala.disparada(direccion)
 	}
 	method remover(){
 		
 	}
 }
 
-class Enemigos{
-	 
-	var property position = game.at(3,13)
-	var image = "tanqueE.png"
-	var property orientacion = 0 // 0 arriba, 1 derecha , 2 abajo , 3 izquierda ( Igual que las posiciones de images )
-	method image() {
-		return image
-	}
-	method image(nuevaImage){
-		image = nuevaImage
-	}
-	method moverYdisparar(){
-		
-	}
+object arriba {
 	
+	method imagenTanque(){ return "tanque.png" }
+	method imagenBala(){ return "bala.png" }
+	method imagenTanqueE(){ return "tanqueE.png" }
+	method move(objeto){ objeto.position(objeto.position().up(1)) }
 }
 
+object derecha {
+	
+	method imagenTanque(){ return "tanque-der.png" }
+	method imagenBala(){ return "bala-der.png" }
+	method imagenTanqueE(){ return "tanqueE-der.png" }
+	method move(objeto){ objeto.position(objeto.position().right(1)) }
+}
 
+object abajo {
 
+	method imagenTanque(){ return "tanque-abj.png" }
+	method imagenBala(){ return "bala-abj.png" }
+	method imagenTanqueE(){ return "tanqueE-abj.png" }
+	method move(objeto){ objeto.position(objeto.position().down(1)) }
+}
+
+object izquierda {
+
+	method imagenTanque(){ return "tanque-izq.png" }
+	method imagenBala(){ return "bala-izq.png" }
+	method imagenTanqueE(){ return "tanqueE-izq.png" }
+	method move(objeto){ objeto.position(objeto.position().left(1)) }
+}
