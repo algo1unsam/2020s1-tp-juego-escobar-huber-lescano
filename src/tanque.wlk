@@ -27,7 +27,7 @@ class Bala{
 		
 		game.addVisual(self)
 		
-		game.onTick(50, "balaMoviendose", { => 
+		game.onTick(50, "balaMoviendose"+self.identity().toString(), { => 
 			if(position.x()>1  and position.x() < 28 and position.y() > 1 and position.y() < 18){
 				self.move(orientacion_,position) 
 			}else{
@@ -39,7 +39,7 @@ class Bala{
 		
 	}
 	method remover(){
-		game.removeTickEvent("balaMoviendose")
+		game.removeTickEvent("balaMoviendose"+self.identity().toString())
 		game.removeVisual(self)
 		
 	}
