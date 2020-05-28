@@ -1,5 +1,6 @@
 import wollok.game.*
 import tanque.*
+import balas.*
 
 class Enemigo {	
 	var property direccion = derecha
@@ -14,5 +15,9 @@ class Enemigo {
 		bala.disparada(direccion)
 	}
 	method moverYdisparar(){	
+	}
+	method golpeado(bala){
+		game.removeVisual(self)
+		bala.remover()
 	}
 }
