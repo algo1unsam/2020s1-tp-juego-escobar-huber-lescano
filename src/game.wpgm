@@ -44,11 +44,10 @@ program game {
 	}
 		
 	/* Disparo del tanque */
-	keyboard.a().onPressDo{(tanque.disparar())}
+	keyboard.a().onPressDo{(tanque.disparo())}
+	keyboard.s().onPressDo{(tanque.superDisparo())}
 		
 	/* Tanques enemigos */
-	const tanqueE = new Enemigo()
-	game.addVisual(tanqueE)
 	keyboard.r().onPressDo{ const tanqueE = new Enemigo(position = game.at(1.randomUpTo(29), 1.randomUpTo(19))) 
 		game.addVisual(tanqueE)
 	}

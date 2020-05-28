@@ -6,6 +6,7 @@ class Enemigo {
 	var property direccion = derecha
 	var property image = direccion.imagenTanqueE()
 	var property position = game.at(3,13)
+	var property vida = 2
 
 	method move() {
 		direccion.move(self)
@@ -17,7 +18,7 @@ class Enemigo {
 	method moverYdisparar(){	
 	}
 	method golpeado(bala){
-		game.removeVisual(self)
-		bala.remover()
+		vida -= bala.danio()
+		if (vida <= 1) game.removeVisual(self)
 	}
 }
