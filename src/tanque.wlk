@@ -4,17 +4,19 @@ import balas.*
 object tanque {
 	var property position = game.at(12,1)
 	var property direccion = arriba
-	var image = arriba.imagenTanque()
-
-	method image(){
-		return image
-	}
+	var property vida = 10
+	var property image = direccion.imagenTanque()
 	
 	method move() {
-		if(image == direccion.imagenTanque()) direccion.move(self) else image = direccion.imagenTanque()
-	}	
-	method disparar(){
+		image = direccion.imagenTanque()
+		direccion.move(self)
+	}
+	method disparo(){
 		const bala = new Bala()
+		bala.disparada(direccion)
+	}
+	method superDisparo(){
+		const bala = new Bala(danio = 3)
 		bala.disparada(direccion)
 	}
 	method remover(){
