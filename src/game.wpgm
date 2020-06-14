@@ -10,7 +10,7 @@ program game {
 	game.width(30)
 	game.height(20)
 	game.boardGround("suelo.png")
-	game.addVisual(tanque)
+	//game.addVisual(tanque)
 	/* Agregando muros laterales */
 	game.width().times({i => agregadorBloques.agregarBloque(i-1, 0, new Muro())})
 	game.height().times({i => agregadorBloques.agregarBloque(0, i, new Muro())})
@@ -18,10 +18,13 @@ program game {
 	game.height().times({i => agregadorBloques.agregarBloque(game.width()-1, i-1, new Muro())})
 	
 	/* Agregando bloques para probar */
+	game.width().times({i => agregadorBloques.agregarBloque(i-1, 5, new Hielo())})
+	game.addVisual(tanque)
 	game.width().times({i => agregadorBloques.agregarBloque(i-1, 17, new Acero())})
 	game.width().times({i => agregadorBloques.agregarBloque(i-1, 14, new Agua())})
 	game.width().times({i => agregadorBloques.agregarBloque(i-1, 10, new Arbusto())})
-	game.width().times({i => agregadorBloques.agregarBloque(i-1, 5, new Hielo())})
+	
+	
 	agregadorBloques.agregarBloque(14, 1, aguila)
 	agregadorBloques.agregarBloque(13, 1, new Ladrillos())
 	agregadorBloques.agregarBloque(13, 2, new Ladrillos())
@@ -42,15 +45,25 @@ program game {
 	keyboard.right().onPressDo { tanque.direccion(derecha)
 		tanque.move()
 	}
-		
+	
+	
 	/* Disparo del tanque */
 	keyboard.a().onPressDo{(tanque.disparo())}
 	keyboard.s().onPressDo{(tanque.superDisparo())}
 		
 	/* Tanques enemigos */
-	keyboard.r().onPressDo{ const tanqueE = new Enemigo(position = game.at(1.randomUpTo(29), 1.randomUpTo(19))) 
+	/* 
+	keyboard.r().onPressDo{ const tanqueE = new Enemigo(position = game.at(1.randomUpTo(29), 1.randomUpTo(19)),vida = 3) 
 		game.addVisual(tanqueE)
 	}
+	*/
+	
+	const posicionesInicialesDeEnemigos = [game.at(1,18),game.at(14,18),game.at(28,18)]
+	game.onTick(6000, "generarEnemigos", { => 
+			//const tanqueE = new Enemigo(position = game.at(1.randomUpTo(29), 1.randomUpTo(19)),vida = 3) 
+			const tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3) 
+			game.addVisual(tanqueE)
+		})			
 	
 	/* Colisiones */
 	/*game.whenCollideDo(tanqueE, { elemento => 
@@ -59,3 +72,12 @@ program game {
 	}) */
 	game.start()
 }
+
+/* 
+ * Movimiento del enemigo
+ * Pantalla de muerte
+ * Test de daño de bala y vida de bloques 
+ * colisiones todas juntas ?
+ * Diferentes clases de enemigos
+ * Mayor dificultad de enemigos en niveles
+ */

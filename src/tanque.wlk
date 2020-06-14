@@ -1,30 +1,57 @@
 import wollok.game.*
 import balas.*
 
-object tanque {
-	var property position = game.at(12,1)
+class Tanques{
+	var vida = 10
 	var property direccion = arriba
-	var property vida = 10
-	var property image = direccion.imagenTanque()
-	
+	var property position = game.at(12,1)
+	method image()
+	method move() = direccion.move(self)
+	method disparo(){
+		const bala = new Bala()
+		bala.disparada(direccion,self)
+	}
+	method golpeado(bala){
+		vida -= bala.danio()
+		bala.remover()
+		if (vida <= 0) game.removeVisual(self)
+	}
+}
+object tanque inherits Tanques{
+	//var property position = game.at(12,1)
+	//var property direccion = arriba
+	//var property vida = 10
+	//var image = direccion.imagenTanque()
+	/* 
 	method move() {
-		image = direccion.imagenTanque()
+		//image = direccion.imagenTanque()
+		//self.image()
 		direccion.move(self)
 	}
+	*/
+
+	override method image() = direccion.imagenTanque()
+	
+	/* 
 	method disparo(){
 		const bala = new Bala()
 		bala.disparada(direccion)
 	}
+	
+	*/
 	method superDisparo(){
 		const bala = new Bala(danio = 3)
-		bala.disparada(direccion)
+		bala.disparada(direccion,self)
 	}
 	method remover(){
 		
 	}
 	
-	method golpeado(bala){
-		
+	override method golpeado(bala){
+		super(bala)
+		if(not(game.hasVisual(self))){
+		// llama a un metodo que imprime game over y termina	
+		}
 	}
 }
 
