@@ -8,15 +8,14 @@ object agregadorBloques{
 
 class Bloque{	
 	method image()
-	method golpeado(bala){  }
+	method golpeado(bala){}
 }
 class BloqueSolido inherits Bloque{
-	method golpeado(bala){ bala.remover() }
+	override method golpeado(bala){ bala.remover() }
 }
 class Muro inherits BloqueSolido{
 	
 	override method image(){ return "muro.png" }
-	//override method golpeado(bala){ bala.remover() }
 }
 
 object aguila inherits BloqueSolido{
@@ -40,12 +39,12 @@ class Ladrillos inherits BloqueSolido{
 		super(bala)
 		if (vida <= 0) game.removeVisual(self)
 	}	
+	method vida() = vida
 }
 
 class Acero inherits BloqueSolido{
 	
 	override method image(){ return "acero.png" }
-	//override method golpeado(bala){ bala.remover() }
 }
 
 class Agua inherits Bloque{

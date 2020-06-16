@@ -73,8 +73,7 @@ program game {
 	game.start()
 }
 
-/* 
- * Movimiento del enemigo
+/* Movimiento del enemigo
  * Pantalla de muerte
  * Test de daño de bala y vida de bloques 
  * colisiones todas juntas ?
