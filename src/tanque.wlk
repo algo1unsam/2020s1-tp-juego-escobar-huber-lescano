@@ -3,7 +3,7 @@ import balas.*
 import bloques.*
 
 class Tanques{
-	var vida = 10
+	var golpes = 0
 	var property direccion = arriba
 	var property position = game.at(12,1)
 	method image()
@@ -11,6 +11,7 @@ class Tanques{
 		direccion.verificar(self)
 	}
 	
+	method vida() = 1
 	
 	method disparo(){
 		const bala = new Bala(position = self.position())
@@ -21,14 +22,15 @@ class Tanques{
 	}
 	
 	method golpeadoPorEnemigo(bala){
-		vida -= bala.danio()
-		bala.remover()
-		if (vida <= 0) game.removeVisual(self)
+		
 	}
 	
+	/*method explotar(){
+		const explosion = new Explosion()
+		explosion.desaparecer()
+	}*/
+	
 	method impideElPaso() = true
-
-	method vida() = vida
 
 }
 object tanque inherits Tanques{
@@ -43,7 +45,8 @@ object tanque inherits Tanques{
 		direccion.move(self)
 	}
 	*/
-
+	override method vida() = 5
+	
 	override method image() = direccion.imagenTanque()
 	
 	/* 
@@ -53,21 +56,22 @@ object tanque inherits Tanques{
 	}
 	
 	*/
-	method superDisparo(){
+	/*method superDisparo(){
 		const bala = new Bala(danio = 3)
 		bala.disparada(direccion,self)
 	}
 	method remover(){
 		
+	}*/
+	
+	override method golpeadoPorEnemigo(bala){
+		golpes += bala.danio()
+		bala.remover()
+		//self.explotar()
+		if (golpes >= self.vida()) {game.removeVisual(self)} // salta a la pantalla de Game Over
+		else position = game.at(12,1)
 	}
 	
-	override method golpeado(bala){
-		super(bala)
-		if(not(game.hasVisual(self))){
-		// llama a un metodo que imprime game over y termina	
-		}
-	}
-	method atraviesaBloquesNoSolidos() = false
 }
 
 object arriba {
@@ -75,6 +79,9 @@ object arriba {
 	method imagenTanque(){ return "tanque.png" }
 	method imagenBala(){ return "bala.png" }
 	method imagenTanqueE(){ return "enemigo1.png" }
+	method imagenEnemigo2(){ return "enemigo2.png" }
+	method imagenEnemigo3(){ return "enemigo3.png" }
+	method imagenEnemigo4(){ return "enemigo4.png" }
 	method move(objeto){ objeto.position(objeto.position().up(1)) }
 	method verificar(objeto){
 		var position = objeto.position()
@@ -88,6 +95,9 @@ object derecha {
 	method imagenTanque(){ return "tanque-der.png" }
 	method imagenBala(){ return "bala-der.png" }
 	method imagenTanqueE(){ return "enemigo1-der.png" }
+	method imagenEnemigo2(){ return "enemigo2-der.png" }
+	method imagenEnemigo3(){ return "enemigo3-der.png" }
+	method imagenEnemigo4(){ return "enemigo4-der.png" }
 	method move(objeto){ objeto.position(objeto.position().right(1)) }
 	method verificar(objeto){
 		var position = objeto.position()
@@ -101,7 +111,9 @@ object abajo {
 	method imagenTanque(){ return "tanque-abj.png" }
 	method imagenBala(){ return "bala-abj.png" }
 	method imagenTanqueE(){ return "enemigo1-abj.png" }
-
+	method imagenEnemigo2(){ return "enemigo2-abj.png" }
+	method imagenEnemigo3(){ return "enemigo3-abj.png" }
+	method imagenEnemigo4(){ return "enemigo4-abj.png" }
 	method move(objeto){ objeto.position(objeto.position().down(1)) }
 	method verificar(objeto){
 		var position = objeto.position()
@@ -115,7 +127,9 @@ object izquierda {
 	method imagenTanque(){ return "tanque-izq.png" }
 	method imagenBala(){ return "bala-izq.png" }
 	method imagenTanqueE(){ return "enemigo1-izq.png" }
-
+	method imagenEnemigo2(){ return "enemigo2-izq.png" }
+	method imagenEnemigo3(){ return "enemigo3-izq.png" }
+	method imagenEnemigo4(){ return "enemigo4-izq.png" }
 	method move(objeto){ objeto.position(objeto.position().left(1)) }
 	method verificar(objeto){
 		var position = objeto.position()
@@ -123,3 +137,10 @@ object izquierda {
 		if (not objetos.any({o => o.impideElPaso()}) or objetos.isEmpty()) self.move(objeto)
 	}
 }
+
+/*class Explosion{
+	method image() {return "explosion.png"}
+	method desaparecer(){
+		game.schedule(50, game.removeVisual(self))
+	}
+}*/
