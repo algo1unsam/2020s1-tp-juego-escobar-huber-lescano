@@ -6,16 +6,26 @@ class Tanques{
 	var property direccion = arriba
 	var property position = game.at(12,1)
 	method image()
-	method move() = direccion.move(self)
+	method move() {
+		direccion.verificar(self)
+	}
+	
+	
 	method disparo(){
-		const bala = new Bala()
-		bala.disparada(direccion,self)
+		const bala = new Bala(position = self.position())
+		bala.disparada(direccion)
 	}
 	method golpeado(bala){
+		
+	}
+	
+	method golpeadoPorEnemigo(bala){
 		vida -= bala.danio()
 		bala.remover()
 		if (vida <= 0) game.removeVisual(self)
 	}
+	
+	method impideElPaso() = true
 }
 object tanque inherits Tanques{
 	//var property position = game.at(12,1)
@@ -61,6 +71,11 @@ object arriba {
 	method imagenBala(){ return "bala.png" }
 	method imagenTanqueE(){ return "enemigo1.png" }
 	method move(objeto){ objeto.position(objeto.position().up(1)) }
+	method verificar(objeto){
+		var position = objeto.position()
+		const objetos = game.getObjectsIn(position.up(1))
+		if (not objetos.any({o => o.impideElPaso()}) or objetos.isEmpty()) self.move(objeto)
+	}
 }
 
 object derecha {
@@ -69,6 +84,11 @@ object derecha {
 	method imagenBala(){ return "bala-der.png" }
 	method imagenTanqueE(){ return "enemigo1-der.png" }
 	method move(objeto){ objeto.position(objeto.position().right(1)) }
+	method verificar(objeto){
+		var position = objeto.position()
+		const objetos = game.getObjectsIn(position.right(1))
+		if (not objetos.any({o => o.impideElPaso()}) or objetos.isEmpty()) self.move(objeto)
+	}
 }
 
 object abajo {
@@ -77,12 +97,23 @@ object abajo {
 	method imagenBala(){ return "bala-abj.png" }
 	method imagenTanqueE(){ return "enemigo1-abj.png" }
 	method move(objeto){ objeto.position(objeto.position().down(1)) }
+	method verificar(objeto){
+		var position = objeto.position()
+		const objetos = game.getObjectsIn(position.down(1))
+		if (not objetos.any({o => o.impideElPaso()}) or objetos.isEmpty()) self.move(objeto)
+	}
 }
 
 object izquierda {
-
+	var h = []
+	
 	method imagenTanque(){ return "tanque-izq.png" }
 	method imagenBala(){ return "bala-izq.png" }
 	method imagenTanqueE(){ return "enemigo1-izq.png" }
 	method move(objeto){ objeto.position(objeto.position().left(1)) }
+	method verificar(objeto){
+		var position = objeto.position()
+		const objetos = game.getObjectsIn(position.left(1))
+		if (not objetos.any({o => o.impideElPaso()}) or objetos.isEmpty()) self.move(objeto)
+	}
 }

@@ -20,8 +20,8 @@ program game {
 	/* Agregando bloques para probar */
 	game.width().times({i => agregadorBloques.agregarBloque(i-1, 5, new Hielo())})
 	game.addVisual(tanque)
-	game.width().times({i => agregadorBloques.agregarBloque(i-1, 17, new Acero())})
-	game.width().times({i => agregadorBloques.agregarBloque(i-1, 14, new Agua())})
+	game.width().times({i => agregadorBloques.agregarBloque(i-1, 15, new Acero())})
+	game.width().times({i => agregadorBloques.agregarBloque(i-1, 12, new Agua())})
 	game.width().times({i => agregadorBloques.agregarBloque(i-1, 10, new Arbusto())})
 	
 	
@@ -52,18 +52,17 @@ program game {
 	keyboard.s().onPressDo{(tanque.superDisparo())}
 		
 	/* Tanques enemigos */
-	/* 
-	keyboard.r().onPressDo{ const tanqueE = new Enemigo(position = game.at(1.randomUpTo(29), 1.randomUpTo(19)),vida = 3) 
-		game.addVisual(tanqueE)
-	}
-	*/
+	 
+
+	
 	
 	const posicionesInicialesDeEnemigos = [game.at(1,18),game.at(14,18),game.at(28,18)]
 	game.onTick(6000, "generarEnemigos", { => 
-			//const tanqueE = new Enemigo(position = game.at(1.randomUpTo(29), 1.randomUpTo(19)),vida = 3) 
 			const tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3) 
 			game.addVisual(tanqueE)
-		})			
+			tanqueE.activarMovimiento()
+			
+		})		
 	
 	/* Colisiones */
 	/*game.whenCollideDo(tanqueE, { elemento => 

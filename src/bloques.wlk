@@ -8,10 +8,14 @@ object agregadorBloques{
 
 class Bloque{	
 	method image()
-	method golpeado(bala){  }
+	method golpeado(bala)
+	method golpeadoPorEnemigo(bala){
+		self.golpeado(bala)
+	}
+	method impideElPaso() = true
 }
 class BloqueSolido inherits Bloque{
-	method golpeado(bala){ bala.remover() }
+	override method golpeado(bala){ bala.remover() }
 }
 class Muro inherits BloqueSolido{
 	
@@ -54,11 +58,11 @@ class Agua inherits Bloque{
 }
 
 class Arbusto inherits Bloque{
-	
+	override method impideElPaso() = false
 	override method image(){ return "arbustos.png" }
 }
 
 class Hielo inherits Bloque{
-	
+	override method impideElPaso() = false
 	override method image(){ return "hielo.png" }
 }
