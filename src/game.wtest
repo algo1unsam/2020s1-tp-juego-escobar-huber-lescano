@@ -1,0 +1,18 @@
+import game.*
+import balas.*
+import bloques.*
+import enemigos.*
+import tanque.*
+
+describe "consts" {
+	const ladrillos = new Ladrillos()
+	const agua = new Agua()	
+	const bala = new Bala()
+	const enemigo = new Enemigo()
+
+test "bala golpea ladrillos" {
+	enemigo.golpeado(bala)
+	assert.throwsException({ bala.remover() })
+	assert.throwsException({ enemigo.golpeado(bala) })
+}
+}

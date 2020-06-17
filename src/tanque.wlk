@@ -1,5 +1,6 @@
 import wollok.game.*
 import balas.*
+import bloques.*
 
 class Tanques{
 	var vida = 10
@@ -26,6 +27,9 @@ class Tanques{
 	}
 	
 	method impideElPaso() = true
+
+	method vida() = vida
+
 }
 object tanque inherits Tanques{
 	//var property position = game.at(12,1)
@@ -63,6 +67,7 @@ object tanque inherits Tanques{
 		// llama a un metodo que imprime game over y termina	
 		}
 	}
+	method atraviesaBloquesNoSolidos() = false
 }
 
 object arriba {
@@ -96,6 +101,7 @@ object abajo {
 	method imagenTanque(){ return "tanque-abj.png" }
 	method imagenBala(){ return "bala-abj.png" }
 	method imagenTanqueE(){ return "enemigo1-abj.png" }
+
 	method move(objeto){ objeto.position(objeto.position().down(1)) }
 	method verificar(objeto){
 		var position = objeto.position()
@@ -105,11 +111,11 @@ object abajo {
 }
 
 object izquierda {
-	var h = []
 	
 	method imagenTanque(){ return "tanque-izq.png" }
 	method imagenBala(){ return "bala-izq.png" }
 	method imagenTanqueE(){ return "enemigo1-izq.png" }
+
 	method move(objeto){ objeto.position(objeto.position().left(1)) }
 	method verificar(objeto){
 		var position = objeto.position()
