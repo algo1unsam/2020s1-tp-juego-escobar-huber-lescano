@@ -14,10 +14,11 @@ program game {
 	
 	/* Menu */
 	game.addVisual(stage0)
-	keyboard.enter().onPressDo{ 
-		game.removeVisual(stage0)
-		stage0.cargarMapaYPJ()
-	}
+	
+	keyboard.enter().onPressDo{ stage0.menu() }
+	
+	keyboard.backspace().onPressDo { game.stop() }
+	
 	
 	/* Controles del Tanque */
 	keyboard.up().onPressDo { tanque.direccion(arriba)
@@ -38,23 +39,15 @@ program game {
 	//keyboard.s().onPressDo{(tanque.superDisparo())}
 		
 	
-	
-	
-
-	
-	
-	
 	/* Colisiones */
 	/*game.whenCollideDo(tanqueE, { elemento => 
 		game.removeVisual(tanqueE)
 			elemento.remover()
 	}) */
 	game.start()
+	
 }
 
-/* 
- * Pantalla de muerte
- * Test de daño de bala y vida de bloques 
+/* Test de daño de bala y vida de bloques 
  * colisiones todas juntas ?
- * Mayor dificultad de enemigos en niveles
  */

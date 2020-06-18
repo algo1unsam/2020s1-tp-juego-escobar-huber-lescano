@@ -8,8 +8,9 @@ object stage0{
 	var property position = game.at(0,0)
 	
 	method menu(){
-
-		
+		if(game.hasVisual(self)){ game.removeVisual(self) }
+		if(game.hasVisual(stage1)){ game.removeVisual(stage1) }
+		self.cargarMapaYPJ()
 	}
 	
 	method cargarMapaYPJ(){
@@ -236,7 +237,7 @@ object stage0{
 			tiposDeEnemigos.anyOne().apply()
 			game.addVisual(tanqueE)
 			tanqueE.activarMovimiento()
-			stage0.cargarArbustos()
+			self.cargarArbustos()
 		})	
 			
 	}
@@ -260,4 +261,13 @@ object stage0{
 		2.times({ i => agregadorBloques.agregarBloque(i+15, 4, new Arbusto())})
 		agregadorBloques.agregarBloque(10,3, new Arbusto())
 	}
+}
+
+object stage1 {
+	var property image = "game-over.png"
+	var property position = game.at(0,0)
+	
+	method gameOver(){ game.schedule(1000,{ => game.clear()
+		game.addVisual(self)
+	}) }
 }

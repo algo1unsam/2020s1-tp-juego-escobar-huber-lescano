@@ -8,6 +8,7 @@ describe "consts" {
 	
 	const ladrillos = new Ladrillos()
 	const bala = new Bala()
+	const enemigoNivel2 = new Enemigo2()
 	const enemigo = new Enemigo()
 	const enemigo2 = new Enemigo2()
 	const enemigo3 = new Enemigo3()
@@ -50,4 +51,11 @@ describe "consts" {
 	}
 	
 	
+
+	test "bala golpea enemigo" {
+		enemigoNivel2.golpeado(bala)
+		assert.equals( enemigoNivel2.vida(), 1)
+		//assert.throwsException({ enemigos.Enemigo.golpeado(bala) })
+	}
+
 }

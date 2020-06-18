@@ -1,6 +1,7 @@
 import wollok.game.*
 import balas.*
 import bloques.*
+import stages.*
 
 class Tanques{
 	//var vida 
@@ -33,7 +34,10 @@ class Tanques{
 
 }
 object tanque inherits Tanques{
+
 	var property puntos = 0
+
+	//var vidas = 3
 	//var property position = game.at(12,1)
 	//var property direccion = arriba
 	//var property vida = 10
@@ -74,8 +78,11 @@ object tanque inherits Tanques{
 		bala.remover()
 		//self.explotar()
 		if (golpes >= self.vida()) {
+			stage1.gameOver()
 			game.removeVisual(self)
-			
+			game.onTick(1000,"game over", {=> game.clear()
+				game.addVisual(stage1)
+			})
 		} // salta a la pantalla de Game Over
 		else position = game.at(12,1)
 	}

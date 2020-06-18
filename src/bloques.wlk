@@ -1,4 +1,5 @@
 import wollok.game.*
+import stages.*
 
 object agregadorBloques{
 	method agregarBloque(x, y, bloque){
@@ -33,7 +34,10 @@ object aguila inherits BloqueSolido{
 	override method golpeado(bala){
 		vida -= bala.danio()
 		super(bala)
-		if (vida <= 0) image = "aguila-destruida.png"
+		if (vida <= 0) {image = "aguila-destruida.png"
+				stage1.gameOver()
+				image = "aguila.png"
+		}
 	}
 	override method golpeadoPorEnemigo(bala,disparador_){
 		super(bala,disparador_)
