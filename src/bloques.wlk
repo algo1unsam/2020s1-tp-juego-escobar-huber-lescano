@@ -21,9 +21,7 @@ class BloqueSolido inherits Bloque{
 	override method impideElPaso() = true
 }
 class Muro inherits BloqueSolido{
-	
 	override method image(){ return "muro.png" }
-	//override method golpeado(bala){ bala.remover() }
 }
 
 object aguila inherits BloqueSolido{
@@ -61,9 +59,7 @@ class Ladrillos inherits BloqueSolido{
 }
 
 class Acero inherits BloqueSolido{
-	
 	override method image(){ return "acero.png" }
-	//override method golpeado(bala){ bala.remover() }
 }
 
 class Agua inherits Bloque{

@@ -4,7 +4,6 @@ import bloques.*
 import stages.*
 
 class Tanques{
-	//var vida 
 	var property golpes = 0
 	var property direccion = arriba
 	var property position = game.at(12,1)
@@ -25,11 +24,6 @@ class Tanques{
 	
 	method golpeadoPorEnemigo(bala,disparador_)
 	
-	/*method explotar(){
-		const explosion = new Explosion()
-		explosion.desaparecer()
-	}*/
-	
 	method impideElPaso() = true
 
 }
@@ -37,37 +31,9 @@ object tanque inherits Tanques{
 
 	var property puntos = 0
 
-	//var vidas = 3
-	//var property position = game.at(12,1)
-	//var property direccion = arriba
-	//var property vida = 10
-	//var image = direccion.imagenTanque()
-	/* 
-	method move() {
-		//image = direccion.imagenTanque()
-		//self.image()
-		direccion.move(self)
-	}
-	*/
-	//override method vida() = 3
 	override method vida() = 1
 	
 	override method image() = direccion.imagenTanque()
-	
-	/* 
-	method disparo(){
-		const bala = new Bala()
-		bala.disparada(direccion)
-	}
-	
-	*/
-	/*method superDisparo(){
-		const bala = new Bala(danio = 3)
-		bala.disparada(direccion,self)
-	}
-	method remover(){
-		
-	}*/
 	
 	method sumarPuntos(puntos_){
 		puntos += puntos_
@@ -77,17 +43,8 @@ object tanque inherits Tanques{
 		disparador_.golpeoAlgo()
 		golpes += bala.danio()
 		bala.remover()
-		//self.explotar()
 		if (golpes >= self.vida()) {
 			game.removeVisual(self)
-			/* 
-			game.schedule(1000, {=> 
-				game.clear()
-				game.addVisual(stage1)
-				
-			})
-			* 
-			*/
 			stage1.gameOver()
 		} // salta a la pantalla de Game Over
 		else position = game.at(12,1)
@@ -158,10 +115,3 @@ object izquierda {
 		if (not objetos.any({o => o.impideElPaso()}) or objetos.isEmpty()) self.move(objeto)
 	}
 }
-
-/*class Explosion{
-	method image() {return "explosion.png"}
-	method desaparecer(){
-		game.schedule(50, game.removeVisual(self))
-	}
-}*/

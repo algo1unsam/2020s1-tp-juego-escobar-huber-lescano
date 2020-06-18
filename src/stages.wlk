@@ -2,20 +2,35 @@ import wollok.game.*
 import tanque.*
 import bloques.*
 import enemigos.*
+import sonidos.*
 
+
+	
 object stage0{
 	var property image = "menu.png"
 	var property position = game.at(0,0)
+	var tanqueE
+	const tiposDeEnemigos = [{tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne())}, 
+		{tanqueE = new Enemigo2(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}, 
+		{tanqueE = new Enemigo3(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)},
+		{tanqueE = new Enemigo4(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}
+	]
+	const posicionesInicialesDeEnemigos = [game.at(1,18),game.at(14,18),game.at(28,18)]
 	
 	method cargarJuego(){
+		
 		/* Menu */
 		game.addVisual(stage0)
 		keyboard.enter().onPressDo{ 
-			console.println("Enter")
 			stage0.menu() 
+			sonidos.inicio()
 		}
 		keyboard.backspace().onPressDo { game.stop() }
 		
+		self.controlesDelTanque()
+		
+	}
+	method controlesDelTanque(){
 		/* Controles del Tanque */
 		keyboard.up().onPressDo { 
 			tanque.direccion(arriba)
@@ -35,18 +50,33 @@ object stage0{
 		}
 		/* Disparo del tanque */
 		keyboard.a().onPressDo{(tanque.disparo())}
-		
 	}
 	method menu(){
 		if(game.hasVisual(self)){ 
 			game.removeVisual(self)
 		}
-		//if(game.hasVisual(stage1)){ game.removeVisual(stage1) }
 		self.cargarMapaYPJ()
 	}
 	
 	method cargarMapaYPJ(){
 		
+		
+		self.agregarBloques()
+		
+		tanque.position(game.at(12,1))
+		
+		game.addVisual(tanque)
+		
+		self.cargarArbustos()
+		
+		
+		self.cargarBase()
+		
+		/* Tanques enemigos */
+	 	self.generarEnemigos()
+				
+	}
+	method agregarBloques(){
 		game.width().times({i => agregadorBloques.agregarBloque(i-1, 0, new Muro())})
 		game.height().times({i => agregadorBloques.agregarBloque(0, i, new Muro())})
 		game.width().times({i => agregadorBloques.agregarBloque(i-1, game.height()-1, new Muro())})
@@ -237,41 +267,22 @@ object stage0{
 		agregadorBloques.agregarBloque(4,1, new Ladrillos())
 		3.times({ i => agregadorBloques.agregarBloque(i+19, 1, new Ladrillos())})
 		2.times({ i => agregadorBloques.agregarBloque(i+22, 1, new Acero()) })
-
-		
-		game.addVisual(tanque)
-		
-		self.cargarArbustos()
-		
-		
+	}
+	method cargarBase(){
 		agregadorBloques.agregarBloque(14, 1, aguila)
 		agregadorBloques.agregarBloque(13, 1, new Ladrillos())
 		agregadorBloques.agregarBloque(13, 2, new Ladrillos())
 		agregadorBloques.agregarBloque(14, 2, new Ladrillos())
 		agregadorBloques.agregarBloque(15, 2, new Ladrillos())
 		agregadorBloques.agregarBloque(15, 1, new Ladrillos())
-		
-		/* Tanques enemigos */
-	 
-	
-	const posicionesInicialesDeEnemigos = [game.at(1,18),game.at(14,18),game.at(28,18)]
-	
-
-	// Agregador de enemigos random para probar
-	var tanqueE
-	const tiposDeEnemigos = [{tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne())}, 
-		{tanqueE = new Enemigo2(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}, 
-		{tanqueE = new Enemigo3(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)},
-		{tanqueE = new Enemigo4(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}
-	]
-	
+	}
+	method generarEnemigos(){
 		game.onTick(12000, "generarEnemigos", { => 
 			tiposDeEnemigos.anyOne().apply()
 			game.addVisual(tanqueE)
 			tanqueE.activarMovimiento()
 			self.cargarArbustos()
 		})	
-			
 	}
 	method cargarArbustos(){
 		/* Agregar Arbustos */
@@ -304,18 +315,17 @@ object stage1 {
 			=> 
 			game.clear()
 			game.addVisual(self)
+			sonidos.gameOver()
 			keyboard.enter().onPressDo{
 			if(game.hasVisual(stage1)){
 				game.removeVisual(stage1)
 				game.schedule(1000,{ 
 						game.clear()
-						//game.addVisual(stage0)
 						stage0.cargarJuego() 
 					})
 					
 				}
 			}
+		})
 		}
-		}) 
-	}
 }
