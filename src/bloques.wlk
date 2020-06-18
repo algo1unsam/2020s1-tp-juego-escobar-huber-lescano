@@ -9,7 +9,7 @@ object agregadorBloques{
 class Bloque{	
 	method image()
 	method golpeado(bala) {}
-	method golpeadoPorEnemigo(bala){
+	method golpeadoPorEnemigo(bala,disparador_){
 		self.golpeado(bala)
 	}
 	method impideElPaso() = false
@@ -35,6 +35,10 @@ object aguila inherits BloqueSolido{
 		super(bala)
 		if (vida <= 0) image = "aguila-destruida.png"
 	}
+	override method golpeadoPorEnemigo(bala,disparador_){
+		super(bala,disparador_)
+		disparador_.golpeoAlgo()
+	}
 }
 
 class Ladrillos inherits BloqueSolido{
@@ -46,6 +50,10 @@ class Ladrillos inherits BloqueSolido{
 		super(bala)
 		if (vida <= 0) game.removeVisual(self)
 	}	
+	override method golpeadoPorEnemigo(bala,disparador_){
+		super(bala,disparador_)
+		disparador_.golpeoAlgo()
+	}
 }
 
 class Acero inherits BloqueSolido{
@@ -73,4 +81,8 @@ class Hielo inherits BloqueSolido{
 		super(bala)
 		if (vida <= 0) game.removeVisual(self)
 	}	
+	override method golpeadoPorEnemigo(bala,disparador_){
+		super(bala,disparador_)
+		disparador_.golpeoAlgo()
+	}
 }

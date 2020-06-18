@@ -25,7 +25,7 @@ class Bala{
 
 	}
 	
-	method colisiones(){
+	method colisiones(disparador_){
 		game.whenCollideDo(self, {colisionado => 
 			colisionado.golpeado(self)
 		})
@@ -38,7 +38,7 @@ class Bala{
 	method move() { direccion.move(self) }
 
 	method golpeado(bala){  }
-	method golpeadoPorEnemigo(bala) {
+	method golpeadoPorEnemigo(bala,disparador_) {
 		self.remover()
 	}
 	method impideElPaso() = true
@@ -47,11 +47,12 @@ class Bala{
 class BalaEnemiga inherits Bala{
 	override method colisiones(disparador_){
 		game.whenCollideDo(self, {
-			disparador_.golpeoAlgo()
-			colisionado => colisionado.golpeadoPorEnemigo(self)
+			
+			colisionado => colisionado.golpeadoPorEnemigo(self,disparador_)
+			
 		})
 	}
-	override method golpeadoPorEnemigo(bala)
+	//override method golpeadoPorEnemigo(bala)
 	
 	override method golpeado(bala){
 		self.remover()

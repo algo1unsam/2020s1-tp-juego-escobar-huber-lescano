@@ -32,21 +32,29 @@ program game {
 	
 	/* Disparo del tanque */
 	keyboard.a().onPressDo{(tanque.disparo())}
-	keyboard.s().onPressDo{(tanque.superDisparo())}
+	//keyboard.s().onPressDo{(tanque.superDisparo())}
 		
 	/* Tanques enemigos */
 	 
-
-	
 	
 	const posicionesInicialesDeEnemigos = [game.at(1,18),game.at(14,18),game.at(28,18)]
 	
+
+	// Agregador de enemigos random para probar
+	var tanqueE
+	const tiposDeEnemigos = [{tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne())}, 
+		{tanqueE = new Enemigo2(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3,direccion = abajo)}, 
+		{tanqueE = new Enemigo3(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3,direccion = abajo)},
+		{tanqueE = new Enemigo4(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3,direccion = abajo)}
+	]
+	
 	game.onTick(12000, "generarEnemigos", { => 
-			const tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3) 
+			tiposDeEnemigos.anyOne().apply()
 			game.addVisual(tanqueE)
 			tanqueE.activarMovimiento()
 			stage0.cargarArbustos()
 		})	
+
 	
 	
 	
