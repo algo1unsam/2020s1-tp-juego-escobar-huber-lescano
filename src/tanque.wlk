@@ -5,7 +5,6 @@ import stages.*
 import sonidos.*
 
 class Tanques{
-	//var vida 
 	var property golpes = 0
 	var property direccion = arriba
 	var property position = game.at(12,1)
@@ -28,11 +27,6 @@ class Tanques{
 		
 	}
 	
-	/*method explotar(){
-		const explosion = new Explosion()
-		explosion.desaparecer()
-	}*/
-	
 	method impideElPaso() = true
 
 }
@@ -40,23 +34,11 @@ object tanque inherits Tanques{
 
 	var property puntos = 0
 
-	//var vidas = 3
-	//var property position = game.at(12,1)
-	//var property direccion = arriba
-	//var property vida = 10
-	//var image = direccion.imagenTanque()
-	/* 
-	method move() {
-		//image = direccion.imagenTanque()
-		//self.image()
-		direccion.move(self)
-	}
-	*/
-	//override method vida() = 3
 	override method vida() = 1
 	
 	override method image() = direccion.imagenTanque()
 	
+<<<<<<< HEAD
 	
 	override method disparo(){
 		super()
@@ -72,6 +54,8 @@ object tanque inherits Tanques{
 		
 	}*/
 	
+=======
+>>>>>>> branch 'master' of https://github.com/algo1unsam/2020s1-tp-juego-escobar-huber-lescano.git
 	method sumarPuntos(puntos_){
 		puntos += puntos_
 	}
@@ -80,21 +64,19 @@ object tanque inherits Tanques{
 		disparador_.golpeoAlgo()
 		golpes += bala.danio()
 		bala.remover()
+<<<<<<< HEAD
 		sonidos.jugadorMuere()
 		//self.explotar()
+=======
+>>>>>>> branch 'master' of https://github.com/algo1unsam/2020s1-tp-juego-escobar-huber-lescano.git
 		if (golpes >= self.vida()) {
 			game.removeVisual(self)
-			/* 
-			game.schedule(1000, {=> 
-				game.clear()
-				game.addVisual(stage1)
-				
-			})
-			* 
-			*/
 			stage1.gameOver()
 		} // salta a la pantalla de Game Over
 		else position = game.at(12,1)
+	}
+	method reiniciarPuntos(){
+		puntos = 0
 	}
 	
 }
@@ -162,10 +144,3 @@ object izquierda {
 		if (not objetos.any({o => o.impideElPaso()}) or objetos.isEmpty()) self.move(objeto)
 	}
 }
-
-/*class Explosion{
-	method image() {return "explosion.png"}
-	method desaparecer(){
-		game.schedule(50, game.removeVisual(self))
-	}
-}*/

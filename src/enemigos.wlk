@@ -4,10 +4,7 @@ import balas.*
 import sonidos.*
 
 class Enemigo inherits Tanques {	
-	//var property direccion = abajo
-	//var property image = direccion.imagenTanqueE()
-	//var property position = game.at(3,13)
-	
+
 	var tiempo = 1000
 	var rompioBloque = false
 	const orientaciones = [arriba, abajo, derecha, izquierda]
@@ -43,7 +40,13 @@ class Enemigo inherits Tanques {
 	}
 	
 
+<<<<<<< HEAD
 	
+=======
+	override method golpeadoPorEnemigo(bala,disparador_){
+		
+	}
+>>>>>>> branch 'master' of https://github.com/algo1unsam/2020s1-tp-juego-escobar-huber-lescano.git
 
 
 	method activarMovimiento(){

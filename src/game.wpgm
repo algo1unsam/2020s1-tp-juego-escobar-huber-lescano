@@ -12,12 +12,10 @@ program game {
 	game.height(20)
 	game.boardGround("suelo.png")
 	
+	
+	
 	stage0.cargarJuego()
 	
 	game.start()
 	
 }
-
-/* Test de daño de bala y vida de bloques 
- * colisiones todas juntas ?
- */
