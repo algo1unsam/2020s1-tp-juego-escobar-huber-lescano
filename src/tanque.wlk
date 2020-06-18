@@ -34,7 +34,7 @@ class Tanques{
 
 }
 object tanque inherits Tanques{
-	var vidas = 3
+	//var vidas = 3
 	//var property position = game.at(12,1)
 	//var property direccion = arriba
 	//var property vida = 10
@@ -46,7 +46,7 @@ object tanque inherits Tanques{
 		direccion.move(self)
 	}
 	*/
-	override method vida() = 5
+	override method vida() = 3
 	
 	override method image() = direccion.imagenTanque()
 	
