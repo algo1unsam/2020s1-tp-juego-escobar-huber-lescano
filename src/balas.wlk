@@ -18,11 +18,7 @@ class Bala{
 			self.move()
 		})			
 		self.colisiones(disparador_)
-		
-		
-			/*if(position.x()>1  and position.x() < 28 and position.y() > 1 and position.y() < 18){ self.move() }
-			else{ self.remover() }*/
-
+	
 	}
 	
 	method colisiones(disparador_){

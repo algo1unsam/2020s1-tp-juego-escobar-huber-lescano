@@ -3,7 +3,7 @@ import balas.*
 import bloques.*
 
 class Tanques{
-	var vida 
+	//var vida 
 	var golpes = 0
 	var property direccion = arriba
 	var property position = game.at(12,1)
@@ -12,7 +12,7 @@ class Tanques{
 		direccion.verificar(self)
 	}
 	
-	//method vida() = 1
+	method vida() = 1
 	
 	method disparo(){
 		const bala = new Bala(position = self.position())
@@ -22,9 +22,7 @@ class Tanques{
 		
 	}
 	
-	method golpeadoPorEnemigo(bala){
-		
-	}
+	method golpeadoPorEnemigo(bala,disparador_)
 	
 	/*method explotar(){
 		const explosion = new Explosion()

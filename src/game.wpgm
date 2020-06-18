@@ -43,9 +43,9 @@ program game {
 	// Agregador de enemigos random para probar
 	var tanqueE
 	const tiposDeEnemigos = [{tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne())}, 
-		{tanqueE = new Enemigo2(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3,direccion = abajo)}, 
-		{tanqueE = new Enemigo3(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3,direccion = abajo)},
-		{tanqueE = new Enemigo4(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3,direccion = abajo)}
+		{tanqueE = new Enemigo2(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}, 
+		{tanqueE = new Enemigo3(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)},
+		{tanqueE = new Enemigo4(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}
 	]
 	
 	game.onTick(12000, "generarEnemigos", { => 
