@@ -7,9 +7,41 @@ object stage0{
 	var property image = "menu.png"
 	var property position = game.at(0,0)
 	
+	method cargarJuego(){
+		/* Menu */
+		game.addVisual(stage0)
+		keyboard.enter().onPressDo{ 
+			console.println("Enter")
+			stage0.menu() 
+		}
+		keyboard.backspace().onPressDo { game.stop() }
+		
+		/* Controles del Tanque */
+		keyboard.up().onPressDo { 
+			tanque.direccion(arriba)
+			tanque.move()
+		}
+		keyboard.down().onPressDo { 
+			tanque.direccion(abajo)
+			tanque.move()
+		}
+		keyboard.left().onPressDo { 
+			tanque.direccion(izquierda)
+			tanque.move()
+		}
+		keyboard.right().onPressDo { 
+			tanque.direccion(derecha)
+			tanque.move()
+		}
+		/* Disparo del tanque */
+		keyboard.a().onPressDo{(tanque.disparo())}
+		
+	}
 	method menu(){
-		if(game.hasVisual(self)){ game.removeVisual(self) }
-		if(game.hasVisual(stage1)){ game.removeVisual(stage1) }
+		if(game.hasVisual(self)){ 
+			game.removeVisual(self)
+		}
+		//if(game.hasVisual(stage1)){ game.removeVisual(stage1) }
 		self.cargarMapaYPJ()
 	}
 	
@@ -267,7 +299,23 @@ object stage1 {
 	var property image = "game-over.png"
 	var property position = game.at(0,0)
 	
-	method gameOver(){ game.schedule(1000,{ => game.clear()
-		game.addVisual(self)
-	}) }
+	method gameOver(){
+		game.schedule(1000,{ 
+			=> 
+			game.clear()
+			game.addVisual(self)
+			keyboard.enter().onPressDo{
+			if(game.hasVisual(stage1)){
+				game.removeVisual(stage1)
+				game.schedule(1000,{ 
+						game.clear()
+						//game.addVisual(stage0)
+						stage0.cargarJuego() 
+					})
+					
+				}
+			}
+		}
+		}) 
+	}
 }

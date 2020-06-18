@@ -6,44 +6,14 @@ import stages.*
 
 program game {
 	
-	game.title("Juego Base") 
+	game.title("Battle City") 
 	game.cellSize(16)
 	game.width(30)
 	game.height(20)
 	game.boardGround("suelo.png")
 	
-	/* Menu */
-	game.addVisual(stage0)
+	stage0.cargarJuego()
 	
-	keyboard.enter().onPressDo{ stage0.menu() }
-	
-	keyboard.backspace().onPressDo { game.stop() }
-	
-	
-	/* Controles del Tanque */
-	keyboard.up().onPressDo { tanque.direccion(arriba)
-		tanque.move()
-	}
-	keyboard.down().onPressDo { tanque.direccion(abajo)
-		tanque.move()
-	}
-	keyboard.left().onPressDo { tanque.direccion(izquierda)
-		tanque.move()
-	}
-	keyboard.right().onPressDo { tanque.direccion(derecha)
-		tanque.move()
-	}
-	
-	/* Disparo del tanque */
-	keyboard.a().onPressDo{(tanque.disparo())}
-	//keyboard.s().onPressDo{(tanque.superDisparo())}
-		
-	
-	/* Colisiones */
-	/*game.whenCollideDo(tanqueE, { elemento => 
-		game.removeVisual(tanqueE)
-			elemento.remover()
-	}) */
 	game.start()
 	
 }
