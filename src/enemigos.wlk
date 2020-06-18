@@ -8,6 +8,7 @@ class Enemigo inherits Tanques {
 	//var property position = game.at(3,13)
 	var property vida
 	var tiempo = 1000
+	var rompioBloque = false
 	const orientaciones = [arriba, abajo, derecha, izquierda]
 	override method image() = direccion.imagenTanqueE()
 	
@@ -37,12 +38,23 @@ class Enemigo inherits Tanques {
 	}
 	
 	override method golpeadoPorEnemigo(bala){
-		
+		rompioBloque = true
 	}
+
 	method activarMovimiento(){
 		game.onTick(600, "enemigoMoviendose"+self.identity().toString(), { => self.move()})
-		game.onTick(tiempo, "girar"+self.identity().toString(), { => self.cambiarDireccion()})
+		game.onTick(tiempo, "girar"+self.identity().toString(), { => 
+			if(not(rompioBloque)){
+				self.cambiarDireccion()
+			}else{
+				rompioBloque = false
+			}
+			
+		})
 		game.onTick(1000, "disparar"+self.identity().toString(), { => self.disparo()})
+	}
+	method golpeoAlgo(){
+		
 	}
 }
 class Enemigo2 inherits Tanques{

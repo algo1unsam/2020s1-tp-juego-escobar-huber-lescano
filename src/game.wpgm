@@ -11,7 +11,7 @@ program game {
 	game.width(30)
 	game.height(20)
 	game.boardGround("suelo.png")
-	//game.addVisual(tanque)
+	
 	/* Agregando muros laterales */
 	stage0.cargarMapaYPJ()
 	
@@ -40,15 +40,13 @@ program game {
 	
 	
 	const posicionesInicialesDeEnemigos = [game.at(1,18),game.at(14,18),game.at(28,18)]
-	/*
-	game.onTick(6000, "generarEnemigos", { => 
+	
+	game.onTick(12000, "generarEnemigos", { => 
 			const tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne(),vida = 3) 
 			game.addVisual(tanqueE)
 			tanqueE.activarMovimiento()
-			
+			stage0.cargarArbustos()
 		})	
-		* 
-		*/
 	
 	
 	

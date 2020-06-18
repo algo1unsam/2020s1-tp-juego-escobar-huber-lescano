@@ -7,7 +7,7 @@ class Bala{
 	var property position
 	var property danio = 1
 	// Se ejecuta cuando el tanque dispara la bala
-	method disparada(direccion_){
+	method disparada(direccion_,disparador_){
 		self.direccion(direccion_)
 		self.image(direccion.imagenBala())
 		
@@ -17,7 +17,7 @@ class Bala{
 		game.onTick(50, "balaMoviendose"+self.identity().toString(), { => 
 			self.move()
 		})			
-		self.colisiones()
+		self.colisiones(disparador_)
 		
 		
 			/*if(position.x()>1  and position.x() < 28 and position.y() > 1 and position.y() < 18){ self.move() }
@@ -45,8 +45,11 @@ class Bala{
 }
 
 class BalaEnemiga inherits Bala{
-	override method colisiones(){
-		game.whenCollideDo(self, {colisionado => colisionado.golpeadoPorEnemigo(self)})
+	override method colisiones(disparador_){
+		game.whenCollideDo(self, {
+			disparador_.golpeoAlgo()
+			colisionado => colisionado.golpeadoPorEnemigo(self)
+		})
 	}
 	override method golpeadoPorEnemigo(bala)
 	

@@ -64,7 +64,13 @@ class Arbusto inherits Bloque{
 	override method image(){ return "arbustos.png" }
 }
 
-class Hielo inherits Bloque{
-	
+class Hielo inherits BloqueSolido{
+	var vida = 1
 	override method image(){ return "hielo.png" }
+	
+	override method golpeado(bala){
+		vida -= bala.danio()
+		super(bala)
+		if (vida <= 0) game.removeVisual(self)
+	}	
 }
