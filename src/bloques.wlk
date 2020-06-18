@@ -46,7 +46,7 @@ object aguila inherits BloqueSolido{
 }
 
 class Ladrillos inherits BloqueSolido{
-	var vida = 4
+	var property vida = 4
 	
 	override method image(){ return "ladrillos.png" }	
 	override method golpeado(bala){

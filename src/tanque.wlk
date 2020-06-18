@@ -5,7 +5,7 @@ import stages.*
 
 class Tanques{
 	//var vida 
-	var golpes = 0
+	var property golpes = 0
 	var property direccion = arriba
 	var property position = game.at(12,1)
 	method image()
@@ -34,6 +34,9 @@ class Tanques{
 
 }
 object tanque inherits Tanques{
+
+	var property puntos = 0
+
 	//var vidas = 3
 	//var property position = game.at(12,1)
 	//var property direccion = arriba
@@ -65,6 +68,10 @@ object tanque inherits Tanques{
 	method remover(){
 		
 	}*/
+	
+	method sumarPuntos(puntos_){
+		puntos += puntos_
+	}
 	
 	override method golpeadoPorEnemigo(bala,disparador_){
 		disparador_.golpeoAlgo()
