@@ -6,7 +6,7 @@ object agregadorBloques{
 	}
 }
 
-class Bloque{	
+class Bloque{
 	method image()
 	method golpeado(bala) {}
 	method golpeadoPorEnemigo(bala,disparador_){

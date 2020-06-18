@@ -2,8 +2,18 @@ import wollok.game.*
 import tanque.*
 import bloques.*
 
+
 object stage0{
+	var property image = "menu.png"
+	var property position = game.at(0,0)
+	
+	method menu(){
+
+		
+	}
+	
 	method cargarMapaYPJ(){
+		
 		game.width().times({i => agregadorBloques.agregarBloque(i-1, 0, new Muro())})
 		game.height().times({i => agregadorBloques.agregarBloque(0, i, new Muro())})
 		game.width().times({i => agregadorBloques.agregarBloque(i-1, game.height()-1, new Muro())})
@@ -207,7 +217,7 @@ object stage0{
 		agregadorBloques.agregarBloque(14, 2, new Ladrillos())
 		agregadorBloques.agregarBloque(15, 2, new Ladrillos())
 		agregadorBloques.agregarBloque(15, 1, new Ladrillos())
-	
+			
 	}
 	method cargarArbustos(){
 		/* Agregar Arbustos */
