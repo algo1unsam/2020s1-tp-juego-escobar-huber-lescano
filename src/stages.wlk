@@ -65,6 +65,8 @@ object stage0{
 		
 		tanque.position(game.at(12,1))
 		
+		tanque.reiniciarPuntos()
+		
 		game.addVisual(tanque)
 		
 		self.cargarArbustos()
@@ -90,8 +92,6 @@ object stage0{
 		agregadorBloques.agregarBloque(13, 18, new Ladrillos())
 		2.times({i => agregadorBloques.agregarBloque(i+14, 18, new Acero())})
 		2.times({i => agregadorBloques.agregarBloque(i + 20, 18, new Ladrillos())})
-		agregadorBloques.agregarBloque(25, 18, new Ladrillos())
-		agregadorBloques.agregarBloque(27, 18, new Ladrillos())
 		
 		
 		/* 17 */
@@ -101,22 +101,17 @@ object stage0{
 		
 		agregadorBloques.agregarBloque(19, 17, new Ladrillos())
 		2.times({ i =>agregadorBloques.agregarBloque(i+21, 17, new Ladrillos()) })
-		agregadorBloques.agregarBloque(25, 17, new Ladrillos())
-		2.times({ i =>agregadorBloques.agregarBloque(i+26, 17, new Ladrillos()) })
 		
 		/* 16 */
 		
 		agregadorBloques.agregarBloque(13,16, new Ladrillos())
 		
 		2.times({ i => agregadorBloques.agregarBloque(i+21, 16, new Hielo())})
-		agregadorBloques.agregarBloque(25, 16, new Ladrillos())
 		2.times({i => agregadorBloques.agregarBloque(i+26, 16, new Ladrillos())})
 
 		/* 15 */
 		
-		11.times({i => agregadorBloques.agregarBloque(i+1, 15, new Agua())})
-		agregadorBloques.agregarBloque(14,15, new Agua())
-		
+		5.times({i => agregadorBloques.agregarBloque(i+1, 15, new Agua())})	
 		2.times({ i => agregadorBloques.agregarBloque(i+18, 15, new Ladrillos())})
 		agregadorBloques.agregarBloque(23, 15, new Ladrillos())
 		
@@ -189,7 +184,7 @@ object stage0{
 		
 		/* 8 */
 		2.times({i => agregadorBloques.agregarBloque(i, 8, new Agua())})
-		5.times({i => agregadorBloques.agregarBloque(i+3, 8, new Agua())})
+		2.times({i => agregadorBloques.agregarBloque(i+3, 8, new Agua())})
 		4.times({i => agregadorBloques.agregarBloque(i+9, 8, new Agua())})
 		agregadorBloques.agregarBloque(16, 8, new Ladrillos())
 		agregadorBloques.agregarBloque(17, 8, new Ladrillos())

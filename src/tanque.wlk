@@ -49,6 +49,9 @@ object tanque inherits Tanques{
 		} // salta a la pantalla de Game Over
 		else position = game.at(12,1)
 	}
+	method reiniciarPuntos(){
+		puntos = 0
+	}
 	
 }
 
