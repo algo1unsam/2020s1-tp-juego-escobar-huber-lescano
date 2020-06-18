@@ -12,11 +12,14 @@ program game {
 	game.height(20)
 	game.boardGround("suelo.png")
 	
-	/* Agregando muros laterales */
-	stage0.cargarMapaYPJ()
+	/* Menu */
+	game.addVisual(stage0)
+	keyboard.enter().onPressDo{ game.removeVisual(stage0)
+		stage0.cargarMapaYPJ()
+	}
 	
 	/* Controles del Tanque */
-	keyboard.up().onPressDo {tanque.direccion(arriba)
+	keyboard.up().onPressDo { tanque.direccion(arriba)
 		tanque.move()
 	}
 	keyboard.down().onPressDo { tanque.direccion(abajo)
@@ -28,7 +31,6 @@ program game {
 	keyboard.right().onPressDo { tanque.direccion(derecha)
 		tanque.move()
 	}
-	
 	
 	/* Disparo del tanque */
 	keyboard.a().onPressDo{(tanque.disparo())}
@@ -66,10 +68,9 @@ program game {
 	game.start()
 }
 
-/* Movimiento del enemigo
+/* 
  * Pantalla de muerte
  * Test de daño de bala y vida de bloques 
  * colisiones todas juntas ?
- * Diferentes clases de enemigos
  * Mayor dificultad de enemigos en niveles
  */
