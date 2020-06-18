@@ -46,7 +46,8 @@ object tanque inherits Tanques{
 		direccion.move(self)
 	}
 	*/
-	override method vida() = 3
+	//override method vida() = 3
+	override method vida() = 1
 	
 	override method image() = direccion.imagenTanque()
 	
@@ -71,11 +72,16 @@ object tanque inherits Tanques{
 		bala.remover()
 		//self.explotar()
 		if (golpes >= self.vida()) {
-			stage1.gameOver()
 			game.removeVisual(self)
-			game.onTick(1000,"game over", {=> game.clear()
+			/* 
+			game.schedule(1000, {=> 
+				game.clear()
 				game.addVisual(stage1)
+				
 			})
+			* 
+			*/
+			stage1.gameOver()
 		} // salta a la pantalla de Game Over
 		else position = game.at(12,1)
 	}
