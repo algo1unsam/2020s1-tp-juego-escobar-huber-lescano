@@ -2,16 +2,52 @@ import balas.*
 import bloques.*
 import enemigos.*
 import tanque.*
+import wollok.game.*
 
 describe "consts" {
+	
 	const ladrillos = new Ladrillos()
-	const agua = new Agua()	
 	const bala = new Bala()
 	const enemigo = new Enemigo()
+	const enemigo2 = new Enemigo2()
+	const enemigo3 = new Enemigo3()
+	const enemigo4 = new Enemigo4()
+	
+	/*fixture {
+		agregadorBloques.agregarBloque(12, 5, ladrillos)
+		game.addVisual(tanque)
+		tanque.disparo()
+		
+	}
 
-test "bala golpea ladrillos" {
-	enemigo.golpeado(bala)
-	assert.throwsException({ bala.remover() })
-	assert.throwsException({ enemigo.golpeado(bala) })
-}
+
+	test "bloque de ladrillos se rompe de 4 disparos" {
+		ladrillos.golpeado(bala)
+		assert.equals(3, ladrillos.vida())
+		
+		
+	}
+	
+	test "tanque recibe un golpe"{
+		tanque.golpeadoPorEnemigo(bala, enemigo)
+		assert.equals(1, tanque.golpes())
+	}
+	*/
+	
+	test "suma 100 puntos matar al enemigo tipo 1"{
+		tanque.sumarPuntos(enemigo.puntosQueOtorga())
+		assert.equals(100, tanque.puntos())
+		
+	}
+	
+	test "suma 1000 puntos al matar a cada tipo de enemigo"{
+		tanque.sumarPuntos(enemigo.puntosQueOtorga())
+		tanque.sumarPuntos(enemigo2.puntosQueOtorga())
+		tanque.sumarPuntos(enemigo3.puntosQueOtorga())
+		tanque.sumarPuntos(enemigo4.puntosQueOtorga())
+		assert.equals(1000, tanque.puntos())
+		
+	}
+	
+	
 }

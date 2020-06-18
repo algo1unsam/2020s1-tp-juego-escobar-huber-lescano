@@ -25,10 +25,13 @@ class Enemigo inherits Tanques {
 		tiempo = 1000.randomUpTo(4000)
 	}
 	
+	method puntosQueOtorga() = 100
+	
 	override method golpeado(bala){
 		golpes += bala.danio()
 		bala.remover()
 		if (golpes >= self.vida()) {
+			tanque.sumarPuntos(self.puntosQueOtorga())
 			game.removeTickEvent("enemigoMoviendose"+self.identity().toString())
 			game.removeTickEvent("girar"+self.identity().toString())
 			game.removeTickEvent("disparar"+self.identity().toString())
@@ -61,16 +64,19 @@ class Enemigo inherits Tanques {
 class Enemigo2 inherits Enemigo{
 	override method image() = direccion.imagenEnemigo2()
 	override method velocidad() = 400
+	override method puntosQueOtorga() = 200
 }
 
 class Enemigo3 inherits Enemigo{
 	override method image() = direccion.imagenEnemigo3()
 	override method vida() = 2
+	override method puntosQueOtorga() = 300
 }
 
 class Enemigo4 inherits Enemigo{
 	override method image() = direccion.imagenEnemigo4()
 	override method vida() = 4
+	override method puntosQueOtorga() = 400
 }
 
 

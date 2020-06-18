@@ -4,7 +4,7 @@ import bloques.*
 
 class Tanques{
 	//var vida 
-	var golpes = 0
+	var property golpes = 0
 	var property direccion = arriba
 	var property position = game.at(12,1)
 	method image()
@@ -33,7 +33,7 @@ class Tanques{
 
 }
 object tanque inherits Tanques{
-	var vidas = 3
+	var property puntos = 0
 	//var property position = game.at(12,1)
 	//var property direccion = arriba
 	//var property vida = 10
@@ -45,7 +45,7 @@ object tanque inherits Tanques{
 		direccion.move(self)
 	}
 	*/
-	override method vida() = 5
+	override method vida() = 3
 	
 	override method image() = direccion.imagenTanque()
 	
@@ -63,6 +63,10 @@ object tanque inherits Tanques{
 	method remover(){
 		
 	}*/
+	
+	method sumarPuntos(puntos_){
+		puntos += puntos_
+	}
 	
 	override method golpeadoPorEnemigo(bala,disparador_){
 		disparador_.golpeoAlgo()
