@@ -6,6 +6,8 @@ class Bala{
 	var property image = direccion.imagenBala()
 	var property position
 	var property danio = 1
+	// Variable para saber si ya se removió la bala con el objeto remover
+	var removido = false
 	// Se ejecuta cuando el tanque dispara la bala
 	method disparada(direccion_,disparador_){
 		self.direccion(direccion_)
@@ -27,8 +29,12 @@ class Bala{
 		})
 	}
 	method remover(){
-		game.removeTickEvent("balaMoviendose"+self.identity().toString())
-		game.removeVisual(self)
+		if(not(removido)){
+			removido = true
+			game.removeTickEvent("balaMoviendose"+self.identity().toString())
+			game.removeVisual(self)
+		}
+		
 	}
 	// La bala se mueve según la orientación del tanque que la disparó
 	method move() { direccion.move(self) }
@@ -42,14 +48,10 @@ class Bala{
 
 class BalaEnemiga inherits Bala{
 	override method colisiones(disparador_){
-		game.whenCollideDo(self, {
-			
+		game.whenCollideDo(self, {	
 			colisionado => colisionado.golpeadoPorEnemigo(self,disparador_)
-			
 		})
-	}
-	//override method golpeadoPorEnemigo(bala)
-	
+	}	
 	override method golpeado(bala){
 		self.remover()
 	}

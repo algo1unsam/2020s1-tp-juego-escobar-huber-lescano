@@ -33,6 +33,7 @@ class Tanques{
 
 }
 object tanque inherits Tanques{
+	var vidas = 3
 	//var property position = game.at(12,1)
 	//var property direccion = arriba
 	//var property vida = 10
@@ -68,7 +69,10 @@ object tanque inherits Tanques{
 		golpes += bala.danio()
 		bala.remover()
 		//self.explotar()
-		if (golpes >= self.vida()) {game.removeVisual(self)} // salta a la pantalla de Game Over
+		if (golpes >= self.vida()) {
+			game.removeVisual(self)
+			
+		} // salta a la pantalla de Game Over
 		else position = game.at(12,1)
 	}
 	
