@@ -304,18 +304,24 @@ object stage1 {
 			=> 
 			game.clear()
 			game.addVisual(self)
+			game.addVisual(puntaje)
+			game.say(puntaje, "puntaje: "+ tanque.puntos().toString())
 			keyboard.enter().onPressDo{
-			if(game.hasVisual(stage1)){
-				game.removeVisual(stage1)
+			if(game.hasVisual(self)){
+				game.removeVisual(self)
 				game.schedule(1000,{ 
 						game.clear()
 						//game.addVisual(stage0)
 						stage0.cargarJuego() 
 					})
-					
 				}
 			}
 		}
-		}) 
+	  ) 
 	}
+}
+
+object puntaje {
+	var property position = game.at(-1,2)
+	var property image = "suelo.png"
 }
