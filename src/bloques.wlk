@@ -1,5 +1,6 @@
 import wollok.game.*
 import stages.*
+import sonidos.*
 
 object agregadorBloques{
 	method agregarBloque(x, y, bloque){
@@ -34,10 +35,12 @@ object aguila inherits BloqueSolido{
 	override method golpeado(bala){
 		vida -= bala.danio()
 		super(bala)
-		if (vida <= 0) {image = "aguila-destruida.png"
-				stage1.gameOver()
-				image = "aguila.png"
-		}
+		sonidos.jugadorMuere()
+		image = "aguila-destruida.png"
+		game.schedule(1000, { => 
+			stage1.gameOver()
+			image = "aguila.png"})
+		
 	}
 	override method golpeadoPorEnemigo(bala,disparador_){
 		super(bala,disparador_)
@@ -52,6 +55,7 @@ class Ladrillos inherits BloqueSolido{
 	override method golpeado(bala){
 		vida -= bala.danio()
 		super(bala)
+		
 		if (vida <= 0) game.removeVisual(self)
 	}	
 	override method golpeadoPorEnemigo(bala,disparador_){
@@ -83,6 +87,7 @@ class Hielo inherits BloqueSolido{
 	override method golpeado(bala){
 		vida -= bala.danio()
 		super(bala)
+		
 		if (vida <= 0) game.removeVisual(self)
 	}	
 	override method golpeadoPorEnemigo(bala,disparador_){

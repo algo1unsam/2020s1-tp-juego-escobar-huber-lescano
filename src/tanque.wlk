@@ -2,6 +2,7 @@ import wollok.game.*
 import balas.*
 import bloques.*
 import stages.*
+import sonidos.*
 
 class Tanques{
 	//var vida 
@@ -23,7 +24,9 @@ class Tanques{
 		
 	}
 	
-	method golpeadoPorEnemigo(bala,disparador_)
+	method golpeadoPorEnemigo(bala,disparador_){
+		
+	}
 	
 	/*method explotar(){
 		const explosion = new Explosion()
@@ -54,13 +57,13 @@ object tanque inherits Tanques{
 	
 	override method image() = direccion.imagenTanque()
 	
-	/* 
-	method disparo(){
-		const bala = new Bala()
-		bala.disparada(direccion)
+	
+	override method disparo(){
+		super()
+		sonidos.disparo
 	}
 	
-	*/
+	
 	/*method superDisparo(){
 		const bala = new Bala(danio = 3)
 		bala.disparada(direccion,self)
@@ -77,6 +80,7 @@ object tanque inherits Tanques{
 		disparador_.golpeoAlgo()
 		golpes += bala.danio()
 		bala.remover()
+		sonidos.jugadorMuere()
 		//self.explotar()
 		if (golpes >= self.vida()) {
 			game.removeVisual(self)

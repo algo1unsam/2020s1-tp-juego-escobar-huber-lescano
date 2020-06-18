@@ -1,6 +1,7 @@
 import wollok.game.*
 import tanque.*
 import balas.*
+import sonidos.*
 
 class Enemigo inherits Tanques {	
 	//var property direccion = abajo
@@ -32,17 +33,17 @@ class Enemigo inherits Tanques {
 		bala.remover()
 		if (golpes >= self.vida()) {
 			tanque.sumarPuntos(self.puntosQueOtorga())
+			sonidos.enemigoMuere()
 			game.removeTickEvent("enemigoMoviendose"+self.identity().toString())
 			game.removeTickEvent("girar"+self.identity().toString())
 			game.removeTickEvent("disparar"+self.identity().toString())
 			game.removeVisual(self)
 		}
+		else sonidos.enemigoRecibeDanio()
 	}
 	
 
-	override method golpeadoPorEnemigo(bala,disparador_){
-		//rompioBloque = true
-	}
+	
 
 
 	method activarMovimiento(){
