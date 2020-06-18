@@ -2,16 +2,17 @@ import balas.*
 import bloques.*
 import enemigos.*
 import tanque.*
+import wollok.game.*
 
 describe "consts" {
 	const ladrillos = new Ladrillos()
 	const agua = new Agua()	
 	const bala = new Bala()
-	const enemigo = new Enemigo()
+	const enemigoNivel2 = new Enemigo2()
 
-test "bala golpea ladrillos" {
-	enemigo.golpeado(bala)
-	assert.throwsException({ bala.remover() })
-	assert.throwsException({ enemigo.golpeado(bala) })
+test "bala golpea enemigo" {
+	enemigoNivel2.golpeado(bala)
+	assert.equals( enemigoNivel2.vida(), 1)
+	//assert.throwsException({ enemigos.Enemigo.golpeado(bala) })
 }
 }
