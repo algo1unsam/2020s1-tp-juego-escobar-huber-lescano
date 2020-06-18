@@ -1,7 +1,7 @@
 import wollok.game.*
 import tanque.*
 import bloques.*
-
+import enemigos.*
 
 object stage0{
 	var property image = "menu.png"
@@ -217,6 +217,27 @@ object stage0{
 		agregadorBloques.agregarBloque(14, 2, new Ladrillos())
 		agregadorBloques.agregarBloque(15, 2, new Ladrillos())
 		agregadorBloques.agregarBloque(15, 1, new Ladrillos())
+		
+		/* Tanques enemigos */
+	 
+	
+	const posicionesInicialesDeEnemigos = [game.at(1,18),game.at(14,18),game.at(28,18)]
+	
+
+	// Agregador de enemigos random para probar
+	var tanqueE
+	const tiposDeEnemigos = [{tanqueE = new Enemigo(position = posicionesInicialesDeEnemigos.anyOne())}, 
+		{tanqueE = new Enemigo2(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}, 
+		{tanqueE = new Enemigo3(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)},
+		{tanqueE = new Enemigo4(position = posicionesInicialesDeEnemigos.anyOne(),direccion = abajo)}
+	]
+	
+		game.onTick(12000, "generarEnemigos", { => 
+			tiposDeEnemigos.anyOne().apply()
+			game.addVisual(tanqueE)
+			tanqueE.activarMovimiento()
+			stage0.cargarArbustos()
+		})	
 			
 	}
 	method cargarArbustos(){
