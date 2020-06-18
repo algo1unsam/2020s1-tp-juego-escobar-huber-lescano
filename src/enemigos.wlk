@@ -3,10 +3,7 @@ import tanque.*
 import balas.*
 
 class Enemigo inherits Tanques {	
-	//var property direccion = abajo
-	//var property image = direccion.imagenTanqueE()
-	//var property position = game.at(3,13)
-	
+
 	var tiempo = 1000
 	var rompioBloque = false
 	const orientaciones = [arriba, abajo, derecha, izquierda]
@@ -41,7 +38,7 @@ class Enemigo inherits Tanques {
 	
 
 	override method golpeadoPorEnemigo(bala,disparador_){
-		//rompioBloque = true
+		
 	}
 
 
