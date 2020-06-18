@@ -33,7 +33,7 @@ object aguila inherits BloqueSolido{
 	override method golpeado(bala){
 		vida -= bala.danio()
 		super(bala)
-		sonidos.jugadorMuere()
+		sonidos.gameOver()
 		image = "aguila-destruida.png"
 		game.schedule(1000, { => 
 			stage1.gameOver()

@@ -38,24 +38,11 @@ object tanque inherits Tanques{
 	
 	override method image() = direccion.imagenTanque()
 	
-<<<<<<< HEAD
-	
 	override method disparo(){
 		super()
 		sonidos.disparo
 	}
 	
-	
-	/*method superDisparo(){
-		const bala = new Bala(danio = 3)
-		bala.disparada(direccion,self)
-	}
-	method remover(){
-		
-	}*/
-	
-=======
->>>>>>> branch 'master' of https://github.com/algo1unsam/2020s1-tp-juego-escobar-huber-lescano.git
 	method sumarPuntos(puntos_){
 		puntos += puntos_
 	}
@@ -64,11 +51,7 @@ object tanque inherits Tanques{
 		disparador_.golpeoAlgo()
 		golpes += bala.danio()
 		bala.remover()
-<<<<<<< HEAD
-		sonidos.jugadorMuere()
-		//self.explotar()
-=======
->>>>>>> branch 'master' of https://github.com/algo1unsam/2020s1-tp-juego-escobar-huber-lescano.git
+		sonidos.gameOver()
 		if (golpes >= self.vida()) {
 			game.removeVisual(self)
 			stage1.gameOver()

@@ -40,13 +40,9 @@ class Enemigo inherits Tanques {
 	}
 	
 
-<<<<<<< HEAD
-	
-=======
 	override method golpeadoPorEnemigo(bala,disparador_){
 		
 	}
->>>>>>> branch 'master' of https://github.com/algo1unsam/2020s1-tp-juego-escobar-huber-lescano.git
 
 
 	method activarMovimiento(){
