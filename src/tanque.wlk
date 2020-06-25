@@ -40,7 +40,7 @@ object tanque inherits Tanques{
 	
 	override method disparo(){
 		super()
-		sonidos.disparo
+		sonidos.disparo()
 	}
 	
 	method sumarPuntos(puntos_){

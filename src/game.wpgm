@@ -11,11 +11,7 @@ program game {
 	game.width(30)
 	game.height(20)
 	game.boardGround("suelo.png")
-	
-	
-	
 	stage0.cargarJuego()
-	
 	game.start()
 	
 }
